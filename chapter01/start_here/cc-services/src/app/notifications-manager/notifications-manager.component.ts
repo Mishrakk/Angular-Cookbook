@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { first } from 'rxjs/operators';
+import { NotificationsService } from 'src/services/notifications.service';
 
 @Component({
   selector: 'app-notifications-manager',
@@ -6,25 +9,37 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./notifications-manager.component.scss']
 })
 export class NotificationsManagerComponent implements OnInit {
-  notificationsCount = 0
-  constructor() { }
+  notificationsCount$: Observable<number>;
+  constructor(private notificationService: NotificationsService) { }
 
   ngOnInit(): void {
+    this.notificationsCount$ = this.notificationService.count$;
   }
 
   addNotification() {
-    this.notificationsCount++;
+    this.getCountValue(v => {
+      this.notificationService.setCount(++v);
+    });
   }
 
   removeNotification() {
-    if (this.notificationsCount == 0) {
-      return;
-    }
-    this.notificationsCount--;
+    this.getCountValue(v => {
+      if(v === 0){
+        return;
+      }
+      this.notificationService.setCount(--v);
+    });
   }
 
   resetCount() {
-    this.notificationsCount = 0;
+    this.notificationService.setCount(0);
+  }
+
+  private getCountValue(callback){
+    this.notificationsCount$
+    .pipe(
+      first()
+    ).subscribe(callback);
   }
 
 }
