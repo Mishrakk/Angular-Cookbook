@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { HighlightColor } from './directives/highlight.directive';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   searchText = '';
+  hcolor: HighlightColor = HighlightColor.LightCoral;
 }
