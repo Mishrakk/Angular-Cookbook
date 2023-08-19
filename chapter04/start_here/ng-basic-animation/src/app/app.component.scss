@@ -18,20 +18,10 @@
         min-width: 40px;
         text-align: left;
         justify-content: center;
-        transition: all 1s ease;
-        &__text {
-          transition: all 1s ease;
-          width: 0;
-          visibility: hidden;
-        }
         &--active {
           [class^='icon-'],
           [class*=' icon-'] {
             margin-right: 10px;
-          }
-          .type-picker__options__option__btn__text {
-            width: auto;
-            visibility: visible;
           }
         }
       }
