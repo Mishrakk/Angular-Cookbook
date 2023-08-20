@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { cardAnimation } from '../../animations';
 
 @Component({
@@ -10,6 +10,14 @@ import { cardAnimation } from '../../animations';
 export class TwitterCardComponent implements OnInit {
   cardState
   constructor() { }
+  
+  @HostListener('mouseenter') onMouseEnter(){
+    this.cardState = 'hovered';
+  }
+
+  @HostListener('mouseleave') onMouseLeave(){
+    this.cardState = 'active';
+  }
 
   ngOnInit(): void {
     this.cardState = 'active'

@@ -11,6 +11,11 @@ export const cardAnimation = trigger('cardAnimation', [
     color: 'rgb(51, 51, 51)',
     backgroundColor: 'white'
   })),
+  state('hovered', style({
+    transform: 'scale3d(1.05, 1.05. 1.05)',
+    backgroundColor: '#333',
+    color: 'white'
+  })),
   transition('void => active', [
     style({
       transform: 'translateX(-200px)',
@@ -21,4 +26,18 @@ export const cardAnimation = trigger('cardAnimation', [
       opacity: 1
     }))
   ]),
+  transition('active => hovered', [
+    animate('0.3s 0s ease-out', style({
+      transform: 'scale3d(1.05, 1.05. 1.05)',
+      backgroundColor: '#333',
+      color: 'white'
+    }))
+  ]),
+  transition('hovered => active', [
+    animate('0.3s 0s ease-out', style({
+      transform: 'scale3d(1, 1, 1)',
+      backgroundColor: 'rgb(51, 51, 51)',
+      color: 'white'
+    }))
+  ])
 ])
