@@ -17,7 +17,7 @@
       </div>
     </div>
   </div>
-  <div class="fruits">
+  <div class="fruits" [@listAnimation]="bucket.length">
     <ng-container *ngIf="bucket.length > 0; else bucketEmptyMessage">
       <div class="fruits__item" *ngFor="let item of bucket;">
         <div class="fruits__item__title">{{item.name}}</div>
