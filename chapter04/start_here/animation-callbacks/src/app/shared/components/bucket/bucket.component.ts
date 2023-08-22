@@ -15,6 +15,7 @@ export class BucketComponent implements OnInit {
   $bucket: Observable<IFruit[]>;
   selectedFruit: Fruit | null = null;
   fruits: string[] = Object.values(Fruit);
+  isSaving: boolean;
   constructor(private bucketService: BucketService) {}
 
   ngOnInit(): void {
@@ -28,7 +29,17 @@ export class BucketComponent implements OnInit {
       name: this.selectedFruit,
     });
   }
+
   deleteFromBucket(fruit: IFruit) {
     this.bucketService.removeItem(fruit);
+  }
+
+  onAnimationStarted(event: AnimationEvent){
+    this.isSaving = true;
+  }
+
+  onAnimationDone(event: AnimationEvent){
+    this.isSaving = false;
+    this.selectedFruit = null;
   }
 }
