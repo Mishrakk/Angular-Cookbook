@@ -9,10 +9,16 @@ const routes: Routes = [
   },
   {
     path: 'home',
+    data: {
+      transitionState: 'HomePage'
+    },
     loadChildren: () => import('./home/home.module').then(m => m.HomeModule),
   },
   {
     path: 'about',
+    data: {
+      transitionState: 'AboutPage'
+    },
     loadChildren: () => import('./about/about.module').then(m => m.AboutModule),
   },
 ];
