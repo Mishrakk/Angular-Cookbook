@@ -1,17 +1,17 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Observable, merge } from 'rxjs';
 import { interval } from 'rxjs/internal/observable/interval';
-import { Subscription } from 'rxjs/internal/Subscription';
-import { takeWhile } from 'rxjs/operators';
+import { map, takeWhile, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomeComponent implements OnInit {
   isComponentAlive: boolean;
-  subscription: Subscription = null;
   inputStreamData = ['john wick', 'inception', 'interstellar'];
+  streamsOutput$: Observable<number[]>;
   outputStreamData = [];
 
   constructor() { }
@@ -20,39 +20,23 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.startStream();
   }
 
-  ngOnDestroy() {
-    this.stopStream();
-  }
-
   startStream() {
     this.isComponentAlive = true;
     const streamSource = interval(1500);
     const secondStreamSource = interval(3000);
     const fastestStreamSource = interval(500);
-    streamSource
-      .pipe(
-        takeWhile(() => !!this.isComponentAlive)
-      ).subscribe(input => {
-      this.outputStreamData.push(input);
-      console.log('stream output', input)
-    });
-    secondStreamSource
-      .pipe(
-        takeWhile(() => !!this.isComponentAlive)
-      ).subscribe(input => {
-        this.outputStreamData.push(input);
-        console.log('second stream output', input)
-      });
-    fastestStreamSource
-      .pipe(
-        takeWhile(() => !!this.isComponentAlive)
-      ).subscribe(input => {
-        this.outputStreamData.push(input);
-        console.log('fastest stream output', input)
-      });
+    this.streamsOutput$ = merge(
+      streamSource,
+      secondStreamSource,
+      fastestStreamSource
+    ).pipe(
+      takeWhile(() => !!this.isComponentAlive),
+      tap(output => console.log(output)),
+      map(output => {
+        this.outputStreamData = [...this.outputStreamData, output];
+        return this.outputStreamData;
+      })
+    )
   }
 
-  stopStream() {
-    this.isComponentAlive = false;
-  }
 }
