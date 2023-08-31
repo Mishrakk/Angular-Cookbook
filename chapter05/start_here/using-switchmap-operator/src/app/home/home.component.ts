@@ -9,7 +9,7 @@ import { takeWhile } from 'rxjs/operators';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomeComponent implements OnInit {
   users: IUser[];
   searchForm: FormGroup;
   componentAlive: boolean;
@@ -38,6 +38,4 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.users = users;
     });
   }
-
-  ngOnDestroy() {}
 }
