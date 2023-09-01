@@ -1,0 +1,26 @@
+import { Injectable } from "@angular/core";
+import { Actions, createEffect, ofType } from "@ngrx/effects";
+import { UserService } from "../core/services/user.service";
+import { APP_ACTIONS, getUsersFailure, getUsersSuccess } from "./app.actions";
+import { catchError, map, mergeMap } from "rxjs/operators";
+import { of } from "rxjs";
+
+@Injectable()
+export class AppEffects {
+    constructor(
+        private actions$: Actions,
+        private userService: UserService
+    ){}
+
+    getUsers$ = createEffect(() => 
+        this.actions$.pipe(
+            ofType(APP_ACTIONS.GET_USERS),
+            mergeMap(() => this.userService.getUsers().pipe(
+                map(users => {
+                    return getUsersSuccess({users})
+                }),
+                catchError(error => of(getUsersFailure({error})))
+            ))
+        )
+    )
+}
