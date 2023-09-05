@@ -1,8 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { IUser } from '../core/interfaces/user.interface';
-import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/internal/Observable';
-import { first, takeWhile } from 'rxjs/operators';
+import { first } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store/app.reducer';
 import { selectCurrentUser, selectSimilarUsers, selectUsers } from '../store/app.selectors';
@@ -18,21 +17,14 @@ export class UserDetailComponent implements OnInit, OnDestroy {
   similarUsers$: Observable<IUser[]> = null;
   isComponentAlive: boolean;
   constructor(
-    private route: ActivatedRoute,
     private store: Store<AppState>
   ) {}
 
   ngOnInit() {
     this.isComponentAlive = true;
     this.getUsersIfNecessary();
-    this.route.paramMap.pipe(
-      takeWhile(() => !!this.isComponentAlive)
-    )
-    .subscribe(params => {
-      const uuid = params.get('uuid');
-      this.user$ = this.store.select(selectCurrentUser(uuid))
-      this.similarUsers$ = this.store.select(selectSimilarUsers(uuid))
-    })
+    this.user$ = this.store.select(selectCurrentUser)
+    this.similarUsers$ = this.store.select(selectSimilarUsers)
   }
 
   getUsersIfNecessary() {
