@@ -15,7 +15,7 @@ export class UserCardComponent implements OnInit {
   }
 
   cardClicked() {
-    this.router.navigate([`/user`])
+    this.router.navigate([`/user/${this.user.login.uuid}`])
   }
 
 }
