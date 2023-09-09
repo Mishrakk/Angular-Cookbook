@@ -13,4 +13,7 @@ export class VersionControlComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  addNewReleaseLog(log: ReleaseLog) {
+    this.releaseLogs.unshift(log);
+  }
 }
