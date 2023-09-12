@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { IReleaseLog, ReleaseLog } from 'src/app/classes/release-log';
 import { Apps } from 'src/app/constants/apps';
@@ -11,6 +11,7 @@ import { REGEXES } from 'src/app/constants/regexes';
 })
 export class ReleaseFormComponent implements OnInit {
   @Output() newReleaseLog = new EventEmitter<ReleaseLog>();
+  @ViewChild('releaseForm') releaseForm: NgForm;
   apps = Object.values(Apps);
   versionInputRegex = REGEXES.SEMANTIC_VERSION;
   newLog: IReleaseLog = {
