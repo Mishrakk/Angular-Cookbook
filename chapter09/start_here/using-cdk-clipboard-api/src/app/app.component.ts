@@ -1,4 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { Clipboard } from '@angular/cdk/clipboard';
 import { ContentType } from './constants/content-type';
 import { IMAGE_URL } from './constants/image-url';
 import { LOREM_IPSUM_TEXT } from './constants/lorem-ipsum-text';
@@ -22,7 +23,7 @@ export class AppComponent implements OnInit {
     }
   }
 
-  constructor() {
+  constructor(private clipboard: Clipboard) {
     this.resetCopiedHash();
   }
 
@@ -38,5 +39,11 @@ export class AppComponent implements OnInit {
 
   resetCopiedHash() {
     this.contentCopied = null;
+  }
+
+  async copyImageUrl(srcImageUrl) {
+    const data = await fetch(srcImageUrl);
+    const blob = await data.blob();
+    this.clipboard.copy(URL.createObjectURL(blob));
   }
 }
