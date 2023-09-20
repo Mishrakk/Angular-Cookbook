@@ -8,6 +8,8 @@ import { ChatComponent } from './components/chat/chat.component';
 import { ChatMessagesComponent } from './components/chat-messages/chat-messages.component';
 import { WriteMessageComponent } from './components/write-message/write-message.component';
 import { FormsModule } from '@angular/forms';
+import { TextFieldModule } from '@angular/cdk/text-field';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,7 +18,7 @@ import { FormsModule } from '@angular/forms';
     ChatMessagesComponent,
     ChatComponent,
   ],
-  imports: [BrowserModule, FormsModule, AppRoutingModule],
+  imports: [BrowserModule, FormsModule, AppRoutingModule, TextFieldModule],
   providers: [],
   bootstrap: [AppComponent],
 })
