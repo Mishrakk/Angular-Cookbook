@@ -52,8 +52,8 @@ describe('VersionControlComponent', () => {
       ReleaseFormComponentHarness
     );
     await rfHarness.setNewAppVersion('abcd');
-    const isErrorshown = await rfHarness.isVersionErrorShown();
-    expect(isErrorshown).toBeTruthy();
+    const isErrorShown = await rfHarness.isVersionErrorShown();
+    expect(isErrorShown).toBeTruthy();
   });
 
   it('should show the new log in the list after adding submitting a new log', async () => {
