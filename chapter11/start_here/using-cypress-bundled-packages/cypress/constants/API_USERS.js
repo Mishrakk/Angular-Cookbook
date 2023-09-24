@@ -1,7 +1,7 @@
 const API_USERS = [
   {
     gender: 'male',
-    name: { title: 'Mr', first: 'Irineu', last: 'da Rocha' },
+    name: { title: 'Mr', first: 'Leo', last: 'Gagné' },
     location: {
       street: { number: 8018, name: 'Rua Doze ' },
       city: 'Passos',
@@ -11,7 +11,7 @@ const API_USERS = [
       coordinates: { latitude: '-71.5032', longitude: '-115.1477' },
       timezone: { offset: '+7:00', description: 'Bangkok, Hanoi, Jakarta' },
     },
-    email: 'irineu.darocha@example.com',
+    email: 'leo.gagne@example.com',
     login: {
       uuid: '85dc5ab4-ecc2-4009-9b65-89d117711d7c',
       username: 'happygoose571',
