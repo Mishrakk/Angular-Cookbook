@@ -1,10 +1,18 @@
 /// <reference types="cypress" />
 
-import API_USERS from '../constants/API_USERS';
-
 context('Users', () => {
+  let API_USERS;
   beforeEach(() => {
-    cy.visit('/users');
+    cy.fixture('users.json')
+    .then(response => {
+      API_USERS = response.results;
+      cy.intercept('GET', 'https://api.randomuser.me/*', response).as('searchUsers');
+      API_USERS.forEach(user => {
+        const url = user.picture.large;
+        const imageName = url.substr(url.lastIndexOf('/') + 1);
+        cy.intercept(url, {fixture: `images/${imageName}`});
+      })
+    }).visit('/users');
   });
 
   it('should get the users list from the server and display', () => {
@@ -14,7 +22,6 @@ context('Users', () => {
   });
 
   it('should get the users list on searching', () => {
-    cy.intercept('https://api.randomuser.me/*').as('searchUsers');
     cy.get('#searchInput').type('irin');
     cy.wait('@searchUsers');
     cy.get('app-user-card').should((domList) => {
