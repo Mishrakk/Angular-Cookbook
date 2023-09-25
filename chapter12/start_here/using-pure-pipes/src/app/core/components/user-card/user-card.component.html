@@ -4,8 +4,8 @@
     <div class="card-body">
       <h5 class="card-title">{{ user.name.first }} {{ user.name.last }}</h5>
       <p class="card-text">{{ user.email }}</p>
-      <p class="card-text unique-id" title="{{ idUsingFactorial(index) }}">
-        {{ idUsingFactorial(index) }}
+      <p class="card-text unique-id" title="{{ index | uniqueId }}">
+        {{ index | uniqueId }}
       </p>
       <a href="tel: {{ user.phone }}" class="btn btn-primary">{{
         user.phone

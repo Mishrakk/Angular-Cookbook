@@ -10,6 +10,7 @@ import { UserCardComponent } from './core/components/user-card/user-card.compone
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { AppFooterComponent } from './core/components/app-footer/app-footer.component';
 import { LoaderComponent } from './core/components/loader/loader.component';
+import { UniqueIdPipe } from './core/pipes/unique-id.pipe';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { LoaderComponent } from './core/components/loader/loader.component';
     UserDetailComponent,
     AppFooterComponent,
     LoaderComponent,
+    UniqueIdPipe,
   ],
   imports: [
     BrowserModule,
