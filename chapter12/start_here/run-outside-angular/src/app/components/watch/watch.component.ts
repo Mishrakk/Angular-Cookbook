@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, NgZone, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-watch',
@@ -20,7 +20,7 @@ export class WatchComponent implements OnInit {
   xVelocity;
   yVelocity;
   intervalTimer;
-  constructor() {
+  constructor(private zone: NgZone) {
     this.xVelocity = this.minSpeed;
     this.yVelocity = this.minSpeed;
   }
@@ -31,13 +31,15 @@ export class WatchComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.zone.runOutsideAngular(() => {
+      this.intervalTimer = setInterval(() => {
+        this.animate();
+      }, 30);
+    });
     if (!window['appLogs']) {
       window['appLogs'] = {};
     }
     window['appLogs']['watch'] = 0;
-    this.intervalTimer = setInterval(() => {
-      this.animate();
-    }, 30);
   }
 
   calcSpeed() {
