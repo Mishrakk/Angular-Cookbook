@@ -13,4 +13,8 @@ export class TheAmazingListComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+
+  trackByFn(_, user: AppUserCard){
+    return user.email;
+  }
 }
