@@ -7,7 +7,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "analyze-bundle": "webpack-bundle-analyzer dist/using-webpack-bundle-analyzer/stats.json"
   },
   "private": true,
   "dependencies": {
@@ -19,6 +20,7 @@
     "@angular/platform-browser": "~12.0.0",
     "@angular/platform-browser-dynamic": "~12.0.0",
     "@angular/router": "~12.0.0",
+    "date-fns": "^2.30.0",
     "rxjs": "~6.6.0",
     "three": "^0.127.0",
     "tslib": "^2.0.0",
@@ -42,6 +44,7 @@
     "protractor": "~7.0.0",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
-    "typescript": "~4.2.4"
+    "typescript": "~4.2.4",
+    "webpack-bundle-analyzer": "^4.9.1"
   }
 }
