@@ -2,7 +2,7 @@
   "name": "pwa-custom-theme-color",
   "short_name": "pwa-custom-theme-color",
   "theme_color": "#1976d2",
-  "background_color": "#fafafa",
+  "background_color": "#8711fc",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",
