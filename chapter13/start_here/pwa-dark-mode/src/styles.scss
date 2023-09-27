@@ -20,3 +20,13 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --main-bg: #333;
+    --text-color: #fff;
+    --card-bg: #000;
+    --primary-btn-color: #fff;
+    --primary-btn-text-color: #333;
+  }
+}
