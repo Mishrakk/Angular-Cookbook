@@ -6,6 +6,7 @@ import { ValueGuesserComponent } from '../components/value-guesser/value-guesser
 import { LeaderboardService } from '../core/services/leaderboard.service';
 import { IDiceSide } from '../interfaces/dice.interface';
 import { IScore } from '../interfaces/score.interface';
+import { InstallablePromptService } from '../core/services/installable-prompt.service';
 
 @Component({
   selector: 'app-game',
@@ -23,7 +24,10 @@ export class GameComponent implements OnInit {
   guessedValue = null;
   isCorrectGuess = null;
   scores: IScore[] = [];
-  constructor(private leaderboardService: LeaderboardService) {}
+  constructor(
+    private leaderboardService: LeaderboardService,
+    private installPrompt: InstallablePromptService
+    ) {}
 
   ngOnInit(): void {
     this.scores = this.leaderboardService.getScores();
@@ -53,5 +57,6 @@ export class GameComponent implements OnInit {
       name: this.nameForm.get('name').value,
       score: 50,
     });
+    this.installPrompt.showPrompt();
   }
 }
