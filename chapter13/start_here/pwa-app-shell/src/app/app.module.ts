@@ -12,6 +12,7 @@ import { AppFooterComponent } from './core/components/app-footer/app-footer.comp
 import { LoaderComponent } from './core/components/loader/loader.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,7 @@ import { environment } from '../environments/environment';
     LoaderComponent,
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
@@ -31,10 +32,18 @@ import { environment } from '../environments/environment';
       enabled: environment.production,
       // Register the ServiceWorker as soon as the app is stable
       // or after 30 seconds (whichever comes first).
-      registrationStrategy: 'registerWhenStable:30000'
+      registrationStrategy: 'registerWhenStable:30000',
     }),
+    RouterModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
+  exports: [
+    UsersComponent,
+    UserCardComponent,
+    UserDetailComponent,
+    AppFooterComponent,
+    LoaderComponent,
+  ],
 })
 export class AppModule {}
